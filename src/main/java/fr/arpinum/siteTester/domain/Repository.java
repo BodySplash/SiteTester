@@ -12,11 +12,11 @@ public abstract class Repository<T> {
 	}
 
 	public List<T> getAll() {
-		return Database.INSTANCE.getAll(getClassePersistante());
+		return Database.INSTANCE.getAll(getPersistentClass());
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final Class<T> getClassePersistante() {
+	protected final Class<T> getPersistentClass() {
 		final ParameterizedType superclass = (ParameterizedType) getClass().getGenericSuperclass();
 		return (Class<T>) superclass.getActualTypeArguments()[0];
 	}
