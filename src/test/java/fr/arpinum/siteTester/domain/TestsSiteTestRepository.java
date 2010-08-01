@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 
+import fr.arpinum.siteTester.test.WithDatabase;
 import fr.arpinum.siteTester.test.WithFakeSite;
 import fr.arpinum.siteTester.tools.Database;
 import fr.arpinum.siteTester.tools.MockResourceCapturer;
@@ -17,9 +18,11 @@ public class TestsSiteTestRepository {
 	@Rule
 	public WithFakeSite fakeSite = new WithFakeSite();
 
+	@Rule
+	public WithDatabase database = new WithDatabase();
+
 	@Test
 	public void canPersist() {
-		Database.INSTANCE.flush();
 		SiteTest siteTest = createSiteTest();
 		SiteTestRepository repo = new SiteTestRepository();
 		repo.add(siteTest);

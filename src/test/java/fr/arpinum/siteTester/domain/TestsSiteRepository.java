@@ -5,15 +5,19 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.Test;
 
+import fr.arpinum.siteTester.test.WithDatabase;
 import fr.arpinum.siteTester.tools.Database;
 
 public class TestsSiteRepository {
 
+	@Rule
+	public WithDatabase database = new WithDatabase();
+
 	@Test
 	public void canPersist() {
-		Database.INSTANCE.flush();
 		SiteRepository repository = new SiteRepository();
 		Site site = new Site("http://somesite");
 		site.addResource("/accueil.do");

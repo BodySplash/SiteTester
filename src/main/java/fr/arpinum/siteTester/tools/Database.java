@@ -29,15 +29,21 @@ public enum Database {
 
 	public void flush() {
 		container.close();
-		new File(DB_FILE).delete();
+		dbFile.delete();
 		open();
 	}
 
+	public void setFile(File dbFile) {
+		this.dbFile = dbFile;
+		closeAndOpen();
+
+	}
+
 	private void open() {
-		container = Db4o.openFile(DB_FILE);
+		container = Db4o.openFile(dbFile.getAbsolutePath());
 	}
 
 	private ObjectContainer container;
-	private static final String DB_FILE = "db.db4o";
+	private File dbFile = new File("db.db4o");
 
 }

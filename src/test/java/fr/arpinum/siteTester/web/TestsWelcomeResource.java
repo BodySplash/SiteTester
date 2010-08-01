@@ -25,7 +25,7 @@ public class TestsWelcomeResource {
 		Representation representation = resource.get();
 
 		assertThat(resource.getStatus(), is(Status.SUCCESS_OK));
-		assertThat(representation.getText(), containsString("Sites"));
+		assertThat(representation.getText(), containsString("sites"));
 	}
 
 }

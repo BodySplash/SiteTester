@@ -1,6 +1,7 @@
 package fr.arpinum.siteTester.web;
 
 import org.apache.log4j.Logger;
+import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
@@ -18,10 +19,11 @@ public class Server {
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
 		component.getClients().add(Protocol.CLAP);
-		component.getDefaultHost().attach(new SiteTesterApplication());
+		component.getDefaultHost().attach(application);
 	}
 
 	public void start() {
+		Application.setCurrent(application);
 		if (component.isStopped()) {
 			try {
 				component.start();
@@ -33,4 +35,5 @@ public class Server {
 
 	private static final Logger LOGGER = Logger.getLogger(Server.class);
 	private Component component;
+	private SiteTesterApplication application = new SiteTesterApplication();
 }
