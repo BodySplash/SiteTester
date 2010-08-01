@@ -1,19 +1,19 @@
 (function($) {
 	$.fn.sites = function() {
-		var div = this;
-		var load = function() {
+		load(this);
+		return this
+
+		
+		function load(div) {
 			$.get("/sites", function(data) {
-				var content = $(data);
-				content.find("form").submit(function(e) {
+				div.html($(data));	
+				div.find("form").submit(function(e) {
 					$(e.target).ajaxSubmit(function() {
-						load();	
+						load(div);	
 					})
 					return false;
 				})
-				div.html(content);	
 			});
 		}
-		load();
-		return div;
 	}
 })(jQuery)

@@ -10,13 +10,15 @@ public class WithDatabase extends ExternalResource {
 
 	@Override
 	protected void before() throws Throwable {
-		File dbFile = File.createTempFile("test_db40", "db");
-		Database.INSTANCE.setFile(dbFile);
+		dbFile = File.createTempFile("test_db40", "db");
+		Database.INSTANCE.open(dbFile);
 	}
 
 	@Override
 	protected void after() {
-		Database.INSTANCE.flush();
+		Database.INSTANCE.close();
+		dbFile.delete();
 	}
 
+	private File dbFile;
 }

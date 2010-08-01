@@ -22,7 +22,7 @@ public class TestsSiteRepository {
 		Site site = new Site("http://somesite");
 		site.addResource("/accueil.do");
 		repository.add(site);
-		Database.INSTANCE.closeAndOpen();
+		Database.INSTANCE.commit();
 
 		List<Site> all = repository.getAll();
 

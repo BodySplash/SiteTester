@@ -26,7 +26,7 @@ public class TestsSiteTestRepository {
 		SiteTest siteTest = createSiteTest();
 		SiteTestRepository repo = new SiteTestRepository();
 		repo.add(siteTest);
-		Database.INSTANCE.closeAndOpen();
+		Database.INSTANCE.commit();
 
 		List<SiteTest> list = repo.getAll();
 		assertThat(list.size(), is(1));

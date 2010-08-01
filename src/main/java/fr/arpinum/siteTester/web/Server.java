@@ -33,6 +33,14 @@ public class Server {
 		}
 	}
 
+	public void stop() {
+		try {
+			component.stop();
+		} catch (Exception e) {
+			LOGGER.error("Can't stop server", e);
+		}
+	}
+
 	private static final Logger LOGGER = Logger.getLogger(Server.class);
 	private Component component;
 	private SiteTesterApplication application = new SiteTesterApplication();

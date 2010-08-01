@@ -1,8 +1,12 @@
 package fr.arpinum.siteTester.web;
 
+import java.io.File;
+
 import org.restlet.Application;
 import org.restlet.Restlet;
+import org.restlet.routing.Filter;
 
+import fr.arpinum.siteTester.tools.Database;
 import freemarker.template.Configuration;
 
 public class SiteTesterApplication extends Application {
@@ -22,8 +26,22 @@ public class SiteTesterApplication extends Application {
 	}
 
 	@Override
+	public synchronized void start() throws Exception {
+		super.start();
+		Database.INSTANCE.open(new File("db.db4o"));
+	}
+
+	@Override
+	public synchronized void stop() throws Exception {
+		super.stop();
+		Database.INSTANCE.close();
+	}
+
+	@Override
 	public Restlet createInboundRoot() {
-		return new SiteTesterRouter(getContext());
+		Filter filter = new OpenSessionInViewFilter();
+		filter.setNext(new SiteTesterRouter(getContext()));
+		return filter;
 	}
 
 	public Configuration getConfiguration() {

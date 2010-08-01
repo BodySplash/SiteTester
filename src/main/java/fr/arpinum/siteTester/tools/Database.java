@@ -3,7 +3,7 @@ package fr.arpinum.siteTester.tools;
 import java.io.File;
 import java.util.List;
 
-import com.db4o.Db4o;
+import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 
 public enum Database {
@@ -11,7 +11,6 @@ public enum Database {
 	INSTANCE;
 
 	private Database() {
-		open();
 	}
 
 	public void store(final Object object) {
@@ -22,28 +21,27 @@ public enum Database {
 		return container.queryByExample(clazz);
 	}
 
-	public void closeAndOpen() {
-		container.close();
-		open();
-	}
-
 	public void flush() {
 		container.close();
-		dbFile.delete();
-		open();
 	}
 
-	public void setFile(File dbFile) {
-		this.dbFile = dbFile;
-		closeAndOpen();
+	public void close() {
+		container.close();
 
 	}
 
-	private void open() {
-		container = Db4o.openFile(dbFile.getAbsolutePath());
+	public void commit() {
+		container.commit();
+	}
+
+	public void rollback() {
+		container.rollback();
+	}
+
+	public void open(File file) {
+		container = Db4oEmbedded.openFile(file.getAbsolutePath());
 	}
 
 	private ObjectContainer container;
-	private File dbFile = new File("db.db4o");
 
 }

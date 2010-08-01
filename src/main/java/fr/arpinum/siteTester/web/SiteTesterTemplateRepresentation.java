@@ -22,21 +22,23 @@ public class SiteTesterTemplateRepresentation extends OutputRepresentation {
 		return this;
 	}
 
-	public SiteTesterTemplateRepresentation(final String templateName) {
+	private SiteTesterTemplateRepresentation(final String templateName) {
 		super(MediaType.TEXT_HTML);
+		this.templateName = templateName;
 		setCharacterSet(CharacterSet.UTF_8);
-		representation = new TemplateRepresentation(templateName, SiteTesterApplication.getInstance()
-				.getConfiguration(), MediaType.TEXT_HTML);
 	}
 
-	public SiteTesterTemplateRepresentation(String template, Map<String, Object> data) {
+	private SiteTesterTemplateRepresentation(String template, Map<String, Object> data) {
 		this(template);
 		this.data = data;
 	}
 
 	@Override
 	public void write(OutputStream outputStream) throws IOException {
-		representation.write(outputStream);
+		TemplateRepresentation template = new TemplateRepresentation(templateName, SiteTesterApplication
+				.getInstance().getConfiguration(), MediaType.TEXT_HTML);
+		template.setDataModel(data);
+		template.write(outputStream);
 
 	}
 
@@ -49,6 +51,6 @@ public class SiteTesterTemplateRepresentation extends OutputRepresentation {
 		return (T) data.get(key);
 	}
 
-	private TemplateRepresentation representation;
 	private Map<String, Object> data = Maps.newHashMap();
+	private final String templateName;
 }

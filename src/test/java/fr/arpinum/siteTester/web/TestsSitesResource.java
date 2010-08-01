@@ -12,6 +12,7 @@ import org.restlet.data.Form;
 import org.restlet.data.Status;
 import org.restlet.resource.ClientResource;
 
+import fr.arpinum.siteTester.domain.Repositories;
 import fr.arpinum.siteTester.domain.Site;
 import fr.arpinum.siteTester.domain.SiteRepository;
 import fr.arpinum.siteTester.test.WithDatabase;
@@ -28,8 +29,7 @@ public class TestsSitesResource {
 	@Before
 	public void before() {
 		clientResource = server.getRessource("/sites");
-		repo = new SiteRepository();
-
+		repo = Repositories.sites();
 	}
 
 	@Test

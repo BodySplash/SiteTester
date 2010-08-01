@@ -8,7 +8,7 @@ public class WelcomeResource extends ServerResource {
 
 	@Get
 	public Representation represent() {
-		return new SiteTesterTemplateRepresentation("welcome.ftl");
+		return SiteTesterTemplateRepresentation.forPath("welcome.ftl");
 	}
 
 }

@@ -16,6 +16,6 @@ public class WithWebServer extends ExternalResource {
 	}
 
 	private static final int PORT = 8888;
-	private Server server = new Server(PORT);
+	private static final Server server = new Server(PORT);
 
 }
