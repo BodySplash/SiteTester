@@ -21,10 +21,6 @@ public enum Database {
 		return container.queryByExample(clazz);
 	}
 
-	public void flush() {
-		container.close();
-	}
-
 	public void close() {
 		container.close();
 
