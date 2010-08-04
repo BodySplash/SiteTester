@@ -22,7 +22,7 @@ public class TestsSpider {
 
 		spider.crawl();
 
-		assertThat(site.resources().size(), is(3));
-		assertThat(site.resources(), hasItem(new Resource(site, "/pages/index.htm")));
+		assertThat(site.getResources().isEmpty(), is(false));
+		assertThat(site.getResources(), hasItem(new Resource(site, "/pages/index.htm")));
 	}
 }

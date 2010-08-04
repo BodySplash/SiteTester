@@ -19,6 +19,7 @@ public class TestsSite {
 	@Test
 	public void canCreateSite() {
 		assertThat(site.getUrl(), is(TEST_SITE_URL));
+		assertThat(site.getName(), is(TEST_SITE_URL.replace("http://", "")));
 	}
 
 	@Test
@@ -28,6 +29,6 @@ public class TestsSite {
 		assertThat(resource, notNullValue());
 		assertThat(resource.fullPath(), is(TEST_SITE_URL + "/accueil.do"));
 		assertThat(resource.relativePath(), is("/accueil.do"));
-		assertThat(site.resources(), hasItem(resource));
+		assertThat(site.getResources(), hasItem(resource));
 	}
 }

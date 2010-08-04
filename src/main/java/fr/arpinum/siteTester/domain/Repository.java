@@ -3,6 +3,8 @@ package fr.arpinum.siteTester.domain;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import fr.arpinum.siteTester.tools.Database;
 
 public abstract class Repository<T> {
@@ -12,7 +14,7 @@ public abstract class Repository<T> {
 	}
 
 	public List<T> getAll() {
-		return Database.INSTANCE.getAll(getPersistentClass());
+		return Lists.newArrayList(Database.INSTANCE.getAll(getPersistentClass()));
 	}
 
 	@SuppressWarnings("unchecked")

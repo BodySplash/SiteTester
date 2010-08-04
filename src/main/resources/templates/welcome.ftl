@@ -1,5 +1,4 @@
 <#import "common.ftl" as common>
-
 <@common.wrap "Welcome to site Tester">
 	<script type="text/javascript" src="js/site/jquery.site.js"></script>
 	<script type="text/javascript">
@@ -11,5 +10,4 @@
 	<div id="sites">
 	
 	</div>
-	
 </@common.wrap>

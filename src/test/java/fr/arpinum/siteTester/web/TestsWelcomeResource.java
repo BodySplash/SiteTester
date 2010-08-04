@@ -20,7 +20,7 @@ public class TestsWelcomeResource {
 
 	@Test
 	public void isMapped() throws IOException {
-		ClientResource resource = server.getRessource("/");
+		ClientResource resource = server.getRessource("");
 
 		Representation representation = resource.get();
 

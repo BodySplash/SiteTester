@@ -17,6 +17,10 @@ public class Spider {
 		this.site = site;
 	}
 
+	public Site getSite() {
+		return site;
+	}
+
 	public void crawl() {
 		ICrawler crawler = createCrawler();
 		crawler.start();
@@ -40,4 +44,5 @@ public class Spider {
 	}
 
 	private final Site site;
+
 }

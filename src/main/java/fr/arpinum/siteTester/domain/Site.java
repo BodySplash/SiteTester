@@ -7,7 +7,7 @@ import com.google.common.collect.Lists;
 public class Site {
 
 	public Site(String url) {
-		this.url = url;
+		this.name = url.replace("http://", "");
 	}
 
 	public Resource addResource(String relativePath) {
@@ -20,14 +20,18 @@ public class Site {
 		return getUrl() + page.relativePath();
 	}
 
-	public List<Resource> resources() {
+	public List<Resource> getResources() {
 		return resources;
 	}
 
 	public String getUrl() {
-		return url;
+		return "http://" + name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	private List<Resource> resources = Lists.newArrayList();
-	private final String url;
+	private final String name;
 }

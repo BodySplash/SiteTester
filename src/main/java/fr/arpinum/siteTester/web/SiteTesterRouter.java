@@ -14,9 +14,10 @@ public class SiteTesterRouter extends Router {
 
 	void attachResources() {
 		attach("/", WelcomeResource.class);
-		attach("/sites", SitesResource.class);
-		attach("/theme", new Directory(getContext(), new Reference("clap://class/static-content/theme")));
 		attach("/js", new Directory(getContext(), new Reference("clap://class/static-content/js")));
+		attach("/sites", SitesResource.class);
+		attach("/sites/{uri}/spiders", SpidersResource.class);
+		attach("/theme", new Directory(getContext(), new Reference("clap://class/static-content/theme")));
 	}
 
 }

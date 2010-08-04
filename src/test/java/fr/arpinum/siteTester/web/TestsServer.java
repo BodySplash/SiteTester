@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.restlet.Application;
 import org.restlet.data.Status;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
@@ -14,7 +15,7 @@ public class TestsServer {
 
 	@Before
 	public void before() {
-		server = new Server(7777);
+		server = new Server(new Application(), 7777);
 	}
 
 	@After

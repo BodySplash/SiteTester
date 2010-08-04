@@ -6,29 +6,28 @@ import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Filter;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 import fr.arpinum.siteTester.tools.Database;
+import fr.arpinum.siteTester.tools.SpiderExecutor;
 import freemarker.template.Configuration;
 
 public class SiteTesterApplication extends Application {
-
-	public SiteTesterApplication() {
-		configureFreemarker();
-	}
-
-	private void configureFreemarker() {
-		freemarkerConfiguration = new Configuration();
-		freemarkerConfiguration.setDefaultEncoding("UTF-8");
-		freemarkerConfiguration.setClassForTemplateLoading(getClass(), "/templates");
-	}
 
 	public static SiteTesterApplication getInstance() {
 		return (SiteTesterApplication) Application.getCurrent();
 	}
 
+	@Inject
+	public SiteTesterApplication(@Named("DbFile") String dbFilePath) {
+		this.dbFile = new File(dbFilePath);
+	}
+
 	@Override
 	public synchronized void start() throws Exception {
 		super.start();
-		Database.INSTANCE.open(new File("db.db4o"));
+		Database.INSTANCE.open(dbFile);
 	}
 
 	@Override
@@ -48,5 +47,15 @@ public class SiteTesterApplication extends Application {
 		return freemarkerConfiguration;
 	}
 
+	public SpiderExecutor getSpiderExecutor() {
+		return spiderExecutor;
+	}
+
+	private File dbFile;
+
+	@Inject
 	private Configuration freemarkerConfiguration;
+	@Inject
+	private SpiderExecutor spiderExecutor;
+
 }

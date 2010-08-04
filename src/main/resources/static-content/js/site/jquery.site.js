@@ -1,7 +1,7 @@
 (function($) {
 	$.fn.sites = function() {
 		load(this);
-		return this
+		return this;
 
 		
 		function load(div) {

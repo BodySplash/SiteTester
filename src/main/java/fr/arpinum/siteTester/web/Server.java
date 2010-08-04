@@ -5,6 +5,11 @@ import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.name.Named;
+
 public class Server {
 
 	public static void main(String[] args) {
@@ -12,10 +17,13 @@ public class Server {
 		if (args.length > 0) {
 			port = Integer.parseInt(args[0]);
 		}
-		new Server(port).start();
+		SiteTesterModule module = new SiteTesterModule(port);
+		Injector injector = Guice.createInjector(module);
+		injector.getInstance(Server.class).start();
 	}
 
-	public Server(int port) {
+	@Inject
+	public Server(Application application, @Named("PORT") int port) {
 		component = new Component();
 		component.getServers().add(Protocol.HTTP, port);
 		component.getClients().add(Protocol.CLAP);
@@ -23,7 +31,6 @@ public class Server {
 	}
 
 	public void start() {
-		Application.setCurrent(application);
 		if (component.isStopped()) {
 			try {
 				component.start();
@@ -43,5 +50,4 @@ public class Server {
 
 	private static final Logger LOGGER = Logger.getLogger(Server.class);
 	private Component component;
-	private SiteTesterApplication application = new SiteTesterApplication();
 }

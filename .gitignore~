@@ -3,4 +3,3 @@
 .project
 target
 db.db4o
-dbtest.db4o
