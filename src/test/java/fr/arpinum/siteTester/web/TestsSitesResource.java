@@ -13,8 +13,8 @@ import org.restlet.data.Status;
 import org.restlet.resource.ClientResource;
 
 import fr.arpinum.siteTester.domain.Repositories;
+import fr.arpinum.siteTester.domain.Repository;
 import fr.arpinum.siteTester.domain.Site;
-import fr.arpinum.siteTester.domain.SiteRepository;
 import fr.arpinum.siteTester.test.WithWebServer;
 
 public class TestsSitesResource {
@@ -63,5 +63,5 @@ public class TestsSitesResource {
 	}
 
 	private ClientResource clientResource;
-	private SiteRepository repo;
+	private Repository<Site> repo;
 }

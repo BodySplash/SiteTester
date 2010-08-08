@@ -6,6 +6,8 @@ import java.util.concurrent.Executors;
 
 import com.google.common.collect.Lists;
 
+import fr.arpinum.siteTester.domain.Repositories;
+
 public class SpiderExecutor {
 
 	public List<Spider> spiders() {
@@ -19,6 +21,7 @@ public class SpiderExecutor {
 			@Override
 			public void run() {
 				spider.crawl();
+				Repositories.sites().update(spider.getSite());
 				Database.INSTANCE.commit();
 			}
 		});

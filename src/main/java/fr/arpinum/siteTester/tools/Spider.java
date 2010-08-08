@@ -31,18 +31,20 @@ public class Spider {
 		ICrawler crawler = new Crawler();
 		crawler.setParser(new SimpleHttpClientParser());
 		crawler.setModel(new MaxDepthModel(2));
+		Site site = getSite();
 		crawler.setLinkFilter(new ServerFilter(site.getUrl()));
 		crawler.getModel().add(null, site.getUrl());
 		return crawler;
 	}
 
 	private void addResourcesToSite(@SuppressWarnings("rawtypes") Collection visitedURIs) {
+		Site stuff = getSite();
 		for (Object link : visitedURIs) {
 			Link resource = (Link) link;
-			site.addResource(resource.getURI().replace(site.getUrl(), ""));
+			stuff.addResource(resource.getURI().replace(stuff.getUrl(), ""));
 		}
 	}
 
-	private final Site site;
+	private Site site;
 
 }

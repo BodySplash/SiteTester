@@ -6,8 +6,11 @@ import java.util.List;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.query.Predicate;
 import com.google.common.collect.Lists;
+
+import fr.arpinum.siteTester.domain.Site;
 
 public enum Database {
 
@@ -42,7 +45,9 @@ public enum Database {
 	}
 
 	public void open(File file) {
-		container = Db4oEmbedded.openFile(file.getAbsolutePath());
+		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+		configuration.common().objectClass(Site.class).cascadeOnUpdate(true);
+		container = Db4oEmbedded.openFile(configuration, file.getAbsolutePath());
 	}
 
 	private ObjectContainer container;

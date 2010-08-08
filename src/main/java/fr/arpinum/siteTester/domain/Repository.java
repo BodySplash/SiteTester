@@ -22,4 +22,8 @@ public abstract class Repository<T> {
 		final ParameterizedType superclass = (ParameterizedType) getClass().getGenericSuperclass();
 		return (Class<T>) superclass.getActualTypeArguments()[0];
 	}
+
+	public void update(Site site) {
+		Database.INSTANCE.store(site);
+	}
 }

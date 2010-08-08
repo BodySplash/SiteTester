@@ -7,14 +7,14 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
 import fr.arpinum.siteTester.domain.Repositories;
+import fr.arpinum.siteTester.domain.Repository;
 import fr.arpinum.siteTester.domain.Site;
-import fr.arpinum.siteTester.domain.SiteRepository;
 
 public class SitesResource extends ServerResource {
 
 	@Get
 	public Representation represent() {
-		SiteRepository repo = Repositories.sites();
+		Repository<Site> repo = Repositories.sites();
 		return SiteTesterTemplateRepresentation.forPath("/sites.ftl").with("sites", repo.getAll());
 	}
 

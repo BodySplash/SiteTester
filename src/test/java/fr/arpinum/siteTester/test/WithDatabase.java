@@ -20,5 +20,11 @@ public class WithDatabase extends ExternalResource {
 		dbFile.delete();
 	}
 
+	public void flush() {
+		Database.INSTANCE.close();
+		Database.INSTANCE.open(dbFile);
+	}
+
 	private File dbFile;
+
 }
