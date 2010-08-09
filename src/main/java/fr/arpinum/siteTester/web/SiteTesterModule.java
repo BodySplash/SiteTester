@@ -1,5 +1,7 @@
 package fr.arpinum.siteTester.web;
 
+import java.io.File;
+
 import org.restlet.Application;
 
 import com.google.inject.AbstractModule;
@@ -7,6 +9,7 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 
+import fr.arpinum.siteTester.tools.Database;
 import fr.arpinum.siteTester.tools.SpiderExecutor;
 import freemarker.template.Configuration;
 
@@ -22,6 +25,7 @@ public class SiteTesterModule extends AbstractModule {
 		bind(SpiderExecutor.class).in(Singleton.class);
 		bind(Integer.class).annotatedWith(Names.named("PORT")).toInstance(port);
 		bind(String.class).annotatedWith(Names.named("DbFile")).toInstance(getDatabaseFilePath());
+		bind(Database.class).toInstance(createDatabase(getDatabaseFilePath()));
 	}
 
 	@Provides
@@ -30,6 +34,10 @@ public class SiteTesterModule extends AbstractModule {
 		freemarkerConfiguration.setDefaultEncoding("UTF-8");
 		freemarkerConfiguration.setClassForTemplateLoading(getClass(), "/templates");
 		return freemarkerConfiguration;
+	}
+
+	private Database createDatabase(String dbFile) {
+		return Database.open(new File(dbFile));
 	}
 
 	protected String getDatabaseFilePath() {

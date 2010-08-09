@@ -18,7 +18,7 @@ public class TestsSiteRepository {
 
 	@Before
 	public void before() {
-		repository = new SiteRepository();
+		repository = new SiteRepository(database.getInstance());
 	}
 
 	@Test

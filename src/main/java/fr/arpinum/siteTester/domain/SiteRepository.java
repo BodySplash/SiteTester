@@ -8,11 +8,12 @@ import fr.arpinum.siteTester.tools.Database;
 
 public class SiteRepository extends Repository<Site> {
 
-	SiteRepository() {
+	public SiteRepository(Database database) {
+		super(database);
 	}
 
 	public Site getByName(final String name) {
-		List<Site> sites = Database.INSTANCE.getByPredicate(new Predicate<Site>() {
+		List<Site> sites = getDatebase().getByPredicate(new Predicate<Site>() {
 
 			@Override
 			public boolean match(Site site) {

@@ -9,12 +9,17 @@ import fr.arpinum.siteTester.tools.Database;
 
 public abstract class Repository<T> {
 
+	public Repository(Database database) {
+		this.database = database;
+
+	}
+
 	public void add(T element) {
-		Database.INSTANCE.store(element);
+		database.store(element);
 	}
 
 	public List<T> getAll() {
-		return Lists.newArrayList(Database.INSTANCE.getAll(getPersistentClass()));
+		return Lists.newArrayList(database.getAll(getPersistentClass()));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -24,6 +29,12 @@ public abstract class Repository<T> {
 	}
 
 	public void update(Site site) {
-		Database.INSTANCE.store(site);
+		database.store(site);
 	}
+
+	protected Database getDatebase() {
+		return database;
+	}
+
+	private final Database database;
 }

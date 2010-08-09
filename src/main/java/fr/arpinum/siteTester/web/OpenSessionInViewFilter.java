@@ -8,12 +8,19 @@ import fr.arpinum.siteTester.tools.Database;
 
 public class OpenSessionInViewFilter extends Filter {
 
+	public OpenSessionInViewFilter(Database database) {
+		this.database = database;
+
+	}
+
 	@Override
 	protected void afterHandle(Request request, Response response) {
 		if (response.getStatus().isSuccess()) {
-			Database.INSTANCE.commit();
+			database.commit();
 		} else {
-			Database.INSTANCE.rollback();
+			database.rollback();
 		}
 	}
+
+	private final Database database;
 }

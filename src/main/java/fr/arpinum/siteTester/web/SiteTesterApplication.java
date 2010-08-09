@@ -1,14 +1,12 @@
 package fr.arpinum.siteTester.web;
 
-import java.io.File;
-
 import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Filter;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
+import fr.arpinum.siteTester.domain.Repositories;
 import fr.arpinum.siteTester.tools.Database;
 import fr.arpinum.siteTester.tools.SpiderExecutor;
 import freemarker.template.Configuration;
@@ -19,26 +17,21 @@ public class SiteTesterApplication extends Application {
 		return (SiteTesterApplication) Application.getCurrent();
 	}
 
-	@Inject
-	public SiteTesterApplication(@Named("DbFile") String dbFilePath) {
-		this.dbFile = new File(dbFilePath);
-	}
-
 	@Override
 	public synchronized void start() throws Exception {
 		super.start();
-		Database.INSTANCE.open(dbFile);
+		Repositories.setDatabase(database);
 	}
 
 	@Override
 	public synchronized void stop() throws Exception {
 		super.stop();
-		Database.INSTANCE.close();
+		database.close();
 	}
 
 	@Override
 	public Restlet createInboundRoot() {
-		Filter filter = new OpenSessionInViewFilter();
+		Filter filter = new OpenSessionInViewFilter(database);
 		filter.setNext(new SiteTesterRouter(getContext()));
 		return filter;
 	}
@@ -51,11 +44,11 @@ public class SiteTesterApplication extends Application {
 		return spiderExecutor;
 	}
 
-	private File dbFile;
-
 	@Inject
 	private Configuration freemarkerConfiguration;
 	@Inject
 	private SpiderExecutor spiderExecutor;
+	@Inject
+	private Database database;
 
 }

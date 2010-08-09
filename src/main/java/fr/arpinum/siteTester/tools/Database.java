@@ -12,11 +12,16 @@ import com.google.common.collect.Lists;
 
 import fr.arpinum.siteTester.domain.Site;
 
-public enum Database {
+public class Database {
 
-	INSTANCE;
+	public static Database open(File file) {
+		Database result = new Database(file);
+		result.reopen();
+		return result;
+	}
 
-	private Database() {
+	private Database(File dbFile) {
+		this.dbFile = dbFile;
 	}
 
 	public void store(final Object object) {
@@ -36,6 +41,12 @@ public enum Database {
 		container.close();
 	}
 
+	public void reopen() {
+		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+		configuration.common().objectClass(Site.class).cascadeOnUpdate(true);
+		container = Db4oEmbedded.openFile(configuration, dbFile.getAbsolutePath());
+	}
+
 	public void commit() {
 		container.commit();
 	}
@@ -44,12 +55,7 @@ public enum Database {
 		container.rollback();
 	}
 
-	public void open(File file) {
-		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
-		configuration.common().objectClass(Site.class).cascadeOnUpdate(true);
-		container = Db4oEmbedded.openFile(configuration, file.getAbsolutePath());
-	}
-
 	private ObjectContainer container;
+	private File dbFile;
 
 }

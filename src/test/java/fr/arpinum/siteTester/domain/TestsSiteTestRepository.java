@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import fr.arpinum.siteTester.test.WithDatabase;
 import fr.arpinum.siteTester.test.WithFakeSite;
-import fr.arpinum.siteTester.tools.Database;
 import fr.arpinum.siteTester.tools.MockResourceCapturer;
 
 public class TestsSiteTestRepository {
@@ -24,9 +23,9 @@ public class TestsSiteTestRepository {
 	@Test
 	public void canPersist() {
 		SiteTest siteTest = createSiteTest();
-		SiteTestRepository repo = new SiteTestRepository();
+		SiteTestRepository repo = new SiteTestRepository(database.getInstance());
 		repo.add(siteTest);
-		Database.INSTANCE.commit();
+		database.commit();
 
 		List<SiteTest> list = repo.getAll();
 		assertThat(list.size(), is(1));

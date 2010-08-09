@@ -18,7 +18,7 @@ public class TestsSpiderExecutor {
 
 	@Test
 	public void canRun() throws InterruptedException {
-		SpiderExecutor executor = new SpiderExecutor();
+		SpiderExecutor executor = new SpiderExecutor(database.getInstance());
 		Spider spider = mock(Spider.class);
 
 		executor.schedule(spider);
@@ -29,7 +29,7 @@ public class TestsSpiderExecutor {
 
 	@Test
 	public void commitModifications() throws InterruptedException {
-		SpiderExecutor executor = new SpiderExecutor();
+		SpiderExecutor executor = new SpiderExecutor(database.getInstance());
 		Site site = new Site("http://toto");
 		Repositories.sites().add(site);
 		Spider spider = new MockSpider(site);

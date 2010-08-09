@@ -20,19 +20,20 @@ public class WithWebServer extends ExternalResource {
 		server.start();
 	};
 
-	@Override
-	protected void after() {
-		Database.INSTANCE.close();
-		File file = new File("dbtest.db4o");
-		file.delete();
-		Database.INSTANCE.open(file);
-	}
-
 	private synchronized static void initializeOnce() {
 		if (server == null) {
 			injector = Guice.createInjector(new TestSiteTesterModule(PORT));
 			server = injector.getInstance(Server.class);
 		}
+	}
+
+	@Override
+	protected void after() {
+		Database database = injector.getInstance(Database.class);
+		database.close();
+		File file = new File("dbtest.db4o");
+		file.delete();
+		database.reopen();
 	}
 
 	public SpiderExecutor getSpiderExecutor() {
