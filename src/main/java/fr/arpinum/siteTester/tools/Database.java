@@ -11,6 +11,7 @@ import com.db4o.query.Predicate;
 import com.google.common.collect.Lists;
 
 import fr.arpinum.siteTester.domain.Site;
+import fr.arpinum.siteTester.domain.SiteTest;
 
 public class Database {
 
@@ -44,6 +45,7 @@ public class Database {
 	public void reopen() {
 		EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
 		configuration.common().objectClass(Site.class).cascadeOnUpdate(true);
+		configuration.common().objectClass(SiteTest.class).cascadeOnUpdate(true);
 		container = Db4oEmbedded.openFile(configuration, dbFile.getAbsolutePath());
 	}
 

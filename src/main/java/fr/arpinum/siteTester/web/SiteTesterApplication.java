@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 
 import fr.arpinum.siteTester.domain.Repositories;
 import fr.arpinum.siteTester.tools.Database;
-import fr.arpinum.siteTester.tools.SpiderExecutor;
 import freemarker.template.Configuration;
 
 public class SiteTesterApplication extends Application {
@@ -32,7 +31,7 @@ public class SiteTesterApplication extends Application {
 	@Override
 	public Restlet createInboundRoot() {
 		Filter filter = new OpenSessionInViewFilter(database);
-		filter.setNext(new SiteTesterRouter(getContext()));
+		filter.setNext(new SiteTesterRouter(getContext(), finderFactory));
 		return filter;
 	}
 
@@ -40,15 +39,11 @@ public class SiteTesterApplication extends Application {
 		return freemarkerConfiguration;
 	}
 
-	public SpiderExecutor getSpiderExecutor() {
-		return spiderExecutor;
-	}
-
 	@Inject
 	private Configuration freemarkerConfiguration;
 	@Inject
-	private SpiderExecutor spiderExecutor;
-	@Inject
 	private Database database;
+	@Inject
+	private FinderFactory finderFactory;
 
 }

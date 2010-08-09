@@ -12,6 +12,10 @@ public class SiteTest {
 		this.site = site;
 	}
 
+	public Site getSite() {
+		return site;
+	}
+
 	public void run() {
 		for (Resource resource : site.getResources()) {
 			captures.add(new Capture(resource.relativePath(), resourceCapturer.capture(resource)));

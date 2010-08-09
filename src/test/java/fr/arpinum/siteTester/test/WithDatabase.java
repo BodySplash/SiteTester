@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.junit.rules.ExternalResource;
 
+import fr.arpinum.siteTester.domain.Repositories;
 import fr.arpinum.siteTester.tools.Database;
 
 public class WithDatabase extends ExternalResource {
@@ -12,6 +13,7 @@ public class WithDatabase extends ExternalResource {
 	protected void before() throws Throwable {
 		dbFile = File.createTempFile("test_db40", "db");
 		database = Database.open(dbFile);
+		Repositories.setDatabase(database);
 	}
 
 	@Override

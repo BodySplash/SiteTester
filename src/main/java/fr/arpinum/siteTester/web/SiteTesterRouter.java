@@ -7,17 +7,20 @@ import org.restlet.routing.Router;
 
 public class SiteTesterRouter extends Router {
 
-	public SiteTesterRouter(Context context) {
+	public SiteTesterRouter(Context context, FinderFactory finderFactory) {
 		super(context);
+		this.finderFactory = finderFactory;
 		attachResources();
 	}
 
 	void attachResources() {
 		attach("/", WelcomeResource.class);
 		attach("/js", new Directory(getContext(), new Reference("clap://class/static-content/js")));
-		attach("/sites", SitesResource.class);
-		attach("/sites/{uri}/spiders", SpidersResource.class);
+		attach("/sites", finderFactory.finderOf(SitesResource.class));
+		attach("/sites/{uri}/spiders", finderFactory.finderOf(SpidersResource.class));
+		attach("/sites/{uri}/tests", finderFactory.finderOf(SiteTestsResource.class));
 		attach("/theme", new Directory(getContext(), new Reference("clap://class/static-content/theme")));
 	}
 
+	private final FinderFactory finderFactory;
 }

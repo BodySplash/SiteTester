@@ -5,17 +5,17 @@ body {
 	background-color: #6E9449;
 }
 
-h1, h2 {
-	margin : 0;	
+h1,h2 {
+	margin: 0;
 }
 
 h1 {
-	text-shadow:1px 1px 0px #68366C;
+	text-shadow: 1px 1px 0px #68366C;
 }
 
 h2 {
-	color : #815A84;
-	text-shadow:1px 1px 0px #68366C;	
+	color: #815A84;
+	text-shadow: 1px 1px 0px #68366C;
 }
 
 input[type="text"] {
@@ -34,9 +34,10 @@ input[type="submit"] {
 	box-shadow: 1px 1px 12px #555555;
 	-moz-box-shadow: 1px 1px 12px #555555;
 	-webkit-box-shadow: 1px 1px 12px #555555;
-	background : #815A84;
-	background-image:-webkit-gradient(linear, left bottom, left top,color-stop(0.2, #815A84),color-stop(1, #a67ba9));
-	background-image:-moz-linear-gradient(center bottom,#815A84 20%,#a67ba9 100%);
+	background: #815A84;
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.2, #815A84),
+		color-stop(1, #a67ba9) );
+	background-image: -moz-linear-gradient(center bottom, #815A84 20%, #a67ba9 100%);
 	border: 1px solid #E0E0E0;
 	color: #FFFFFF;
 	margin-top: 10px;
@@ -54,8 +55,8 @@ input[type="submit"] {
 
 #body {
 	background-color: white;
-	position : relative;
-	padding-top: 10px;	
+	position: relative;
+	padding-top: 10px;
 }
 
 #header img {
@@ -70,3 +71,14 @@ input[type="submit"] {
 	background-color: #6E9449;
 	color: #EBE8CA
 }
+
+/* Sites list*/
+#sites {
+	
+}
+
+#sites form {
+	display: inline;
+}
+)
+/* End of Sites list */
