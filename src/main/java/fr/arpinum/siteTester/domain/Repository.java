@@ -28,8 +28,8 @@ public abstract class Repository<T> {
 		return (Class<T>) superclass.getActualTypeArguments()[0];
 	}
 
-	public void update(Site site) {
-		database.store(site);
+	public void update(T element) {
+		database.store(element);
 	}
 
 	protected Database getDatebase() {

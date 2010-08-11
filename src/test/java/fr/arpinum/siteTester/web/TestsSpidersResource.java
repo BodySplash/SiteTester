@@ -13,7 +13,7 @@ import org.restlet.resource.ClientResource;
 
 import fr.arpinum.siteTester.domain.Repositories;
 import fr.arpinum.siteTester.domain.Site;
-import fr.arpinum.siteTester.test.MockSpiderderExecutor;
+import fr.arpinum.siteTester.test.MockSpiderExecutor;
 import fr.arpinum.siteTester.test.WithWebServer;
 
 public class TestsSpidersResource {
@@ -31,7 +31,7 @@ public class TestsSpidersResource {
 		resource.post(new EmptyRepresentation());
 
 		assertThat(resource.getStatus(), is(Status.SUCCESS_ACCEPTED));
-		assertThat(MockSpiderderExecutor.lastSpider.getSite(), is(site));
+		assertThat(MockSpiderExecutor.lastSpider.getSite(), is(site));
 	}
 
 }

@@ -6,12 +6,12 @@ import fr.arpinum.siteTester.tools.Database;
 import fr.arpinum.siteTester.tools.Spider;
 import fr.arpinum.siteTester.tools.SpiderExecutor;
 
-public class MockSpiderderExecutor extends SpiderExecutor {
+public class MockSpiderExecutor extends SpiderExecutor {
 
 	public static Spider lastSpider;
 
 	@Inject
-	public MockSpiderderExecutor(Database database) {
+	public MockSpiderExecutor(Database database) {
 		super(database);
 	}
 
