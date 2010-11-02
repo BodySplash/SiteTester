@@ -22,8 +22,7 @@ public class FullTest {
 
 		FirefoxResourceCapturer resourceCapturer = new FirefoxResourceCapturer();
 		SiteTest test = new SiteTest(blog);
-		test.setResourceCapturer(resourceCapturer);
-		test.run();
+		test.run(resourceCapturer);
 		resourceCapturer.close();
 		for (Capture capture : test.captures()) {
 			capture.exportToFile(new File("/Users/jb/tmp/blog/" + capture.getPath() + ".png"));

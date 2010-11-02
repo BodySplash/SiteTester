@@ -15,7 +15,6 @@ public class TestsSiteTest {
 		site = createSite();
 		resourceCapturer = new MockResourceCapturer();
 		tester = new SiteTest(site);
-		tester.setResourceCapturer(resourceCapturer);
 	}
 
 	private Site createSite() {
@@ -27,7 +26,7 @@ public class TestsSiteTest {
 
 	@Test
 	public void canTakeScreenshots() {
-		tester.run();
+		tester.run(resourceCapturer);
 
 		assertThat(resourceCapturer.captureCallCout, is(2));
 		assertThat(resourceCapturer.uris, hasItem("http://fantaisy/accueil"));
@@ -36,7 +35,7 @@ public class TestsSiteTest {
 
 	@Test
 	public void testingKeepsCaptures() {
-		tester.run();
+		tester.run(resourceCapturer);
 
 		assertThat(tester.captures(), notNullValue());
 		assertThat(tester.captures().size(), is(2));

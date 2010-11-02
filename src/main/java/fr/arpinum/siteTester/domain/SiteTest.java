@@ -16,7 +16,7 @@ public class SiteTest {
 		return site;
 	}
 
-	public void run() {
+	public void run(ResourceCapturer resourceCapturer) {
 		for (Resource resource : site.getResources()) {
 			captures.add(new Capture(resource.relativePath(), resourceCapturer.capture(resource)));
 		}
@@ -27,11 +27,6 @@ public class SiteTest {
 		return captures;
 	}
 
-	public void setResourceCapturer(ResourceCapturer capturer) {
-		resourceCapturer = capturer;
-	}
-
 	private List<Capture> captures = Lists.newArrayList();
 	private final Site site;
-	private ResourceCapturer resourceCapturer;
 }

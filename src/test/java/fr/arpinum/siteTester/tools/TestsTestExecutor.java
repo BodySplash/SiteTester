@@ -18,18 +18,19 @@ public class TestsTestExecutor {
 
 	@Test
 	public void canRun() throws InterruptedException {
-		TestExecutor executor = new TestExecutor();
+		ResourceCapturer mock = mock(ResourceCapturer.class);
+		TestExecutor executor = new TestExecutor(mock);
 		SiteTest siteTest = mock(SiteTest.class);
 
 		executor.schedule(siteTest);
 		Thread.sleep(100);
 
-		verify(siteTest).run();
+		verify(siteTest).run(mock);
 	}
 
 	@Test
 	public void commitModifications() throws InterruptedException {
-		TestExecutor executor = new TestExecutor();
+		TestExecutor executor = new TestExecutor(mock(ResourceCapturer.class));
 		SiteTest siteTest = mock(SiteTest.class);
 
 		executor.schedule(siteTest);

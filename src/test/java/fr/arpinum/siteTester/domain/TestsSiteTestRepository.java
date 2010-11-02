@@ -38,8 +38,7 @@ public class TestsSiteTestRepository {
 		Site site = new Site("http://localhost:9191");
 		site.addResource("/index.htm");
 		SiteTest siteTest = new SiteTest(site);
-		siteTest.setResourceCapturer(new MockResourceCapturer());
-		siteTest.run();
+		siteTest.run(new MockResourceCapturer());
 		return siteTest;
 	}
 }

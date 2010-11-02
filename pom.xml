@@ -7,7 +7,7 @@
 	<name>Arpinum site tester</name>
 	<description>A testing server aiming to automate visual regressions tests and cross-browser rendering issues</description>
 	<properties>
-		<restlet.version>2.0.0</restlet.version>
+		<restlet.version>2.0.1</restlet.version>
 	</properties>
 	<build>
 		<plugins>
@@ -87,9 +87,9 @@
 			<version>1.1.1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.google.collections</groupId>
-			<artifactId>google-collections</artifactId>
-			<version>1.0</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>r07</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>

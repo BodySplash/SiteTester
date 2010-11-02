@@ -10,6 +10,8 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 
 import fr.arpinum.siteTester.tools.Database;
+import fr.arpinum.siteTester.tools.FirefoxResourceCapturer;
+import fr.arpinum.siteTester.tools.ResourceCapturer;
 import fr.arpinum.siteTester.tools.SpiderExecutor;
 import freemarker.template.Configuration;
 
@@ -25,6 +27,7 @@ public class SiteTesterModule extends AbstractModule {
 		bind(SpiderExecutor.class).in(Singleton.class);
 		bind(Integer.class).annotatedWith(Names.named("PORT")).toInstance(getPort());
 		bind(Database.class).toInstance(createDatabase("db.db4o"));
+		bind(ResourceCapturer.class).to(FirefoxResourceCapturer.class);
 	}
 
 	protected Class<? extends SpiderExecutor> getSpiderExecutorClass() {
