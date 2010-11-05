@@ -13,10 +13,10 @@
 	<body>
 		<div id="header">
 			<div class="content">
-				<img src="/theme/images/arpinum.png" />
 				<h1>
-					Site Tester
+					<a href="/">Site Tester</a>
 				</h1>
+				<img src="/theme/images/arpinum.png" />
 			</div>
 		</div>
 		<div id="body">

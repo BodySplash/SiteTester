@@ -53,6 +53,10 @@ input[type="submit"] {
 	font-variant: small-caps;
 }
 
+#header a {
+	color: #EBE8CA;
+}
+
 #body {
 	background-color: white;
 	position: relative;

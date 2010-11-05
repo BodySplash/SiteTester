@@ -2,7 +2,7 @@
 <#if sites??>
 <#list sites as site>
 	<li>
-		${site.name} (${site.resources?size} resources)
+		<a href="sites/${site.name}">${site.name}</a> (${site.resources?size} resources)
 		<form action="/sites/${site.name}/spiders" method="post">
 			<input type="submit" value="Crawl" />
 		</form>

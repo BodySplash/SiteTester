@@ -17,7 +17,7 @@ import freemarker.template.Configuration;
 
 public class SiteTesterModule extends AbstractModule {
 
-	public SiteTesterModule(int port) {
+	public SiteTesterModule(final int port) {
 		this.port = port;
 	}
 
@@ -36,13 +36,14 @@ public class SiteTesterModule extends AbstractModule {
 
 	@Provides
 	public Configuration providesConfiguration() {
-		Configuration freemarkerConfiguration = new Configuration();
+		final Configuration freemarkerConfiguration = new Configuration();
 		freemarkerConfiguration.setDefaultEncoding("UTF-8");
 		freemarkerConfiguration.setClassForTemplateLoading(getClass(), "/templates");
+		freemarkerConfiguration.addAutoImport("common", "/common.ftl");
 		return freemarkerConfiguration;
 	}
 
-	protected Database createDatabase(String dbFile) {
+	protected Database createDatabase(final String dbFile) {
 		return Database.open(new File(dbFile));
 	}
 

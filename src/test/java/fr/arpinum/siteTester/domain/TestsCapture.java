@@ -18,8 +18,8 @@ public class TestsCapture {
 
 	@Test
 	public void canExportToFile() throws IOException {
-		Capture capture = new Capture("plop", "des données".getBytes());
-		File file = tempFolder.newFile("test.png");
+		final Capture capture = new Capture("plop", "des données".getBytes());
+		final File file = tempFolder.newFile("test.png");
 
 		capture.exportToFile(file);
 

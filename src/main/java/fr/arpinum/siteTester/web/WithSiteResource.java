@@ -11,16 +11,12 @@ import fr.arpinum.siteTester.domain.Site;
 
 public abstract class WithSiteResource extends ServerResource {
 
-	public WithSiteResource() {
-		super();
-	}
-
 	@Override
 	protected void doInit() throws ResourceException {
 		try {
 			site = Repositories.sites().getByName(
 					URLDecoder.decode(getRequestAttributes().get("uri").toString(), "UTF8"));
-		} catch (UnsupportedEncodingException e) {
+		} catch (final UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 	}

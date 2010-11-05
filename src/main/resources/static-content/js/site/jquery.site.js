@@ -15,5 +15,12 @@
 				})
 			});
 		}
+	};
+	
+	$.fn.resources = function(site) {
+		var div = $(this);
+		$.get("/sites/" + site + "/resources", function(data) {
+			div.html(data);
+		});
 	}
 })(jQuery)
